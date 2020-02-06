@@ -50,6 +50,18 @@ class CompoundFindTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers \airmoi\FileMaker\Command\CompoundFind::append
+     * @todo   Implement testAppend().
+     */
+    public function testAppend()
+    {
+        // Remove the following lines when you implement this test.
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /**
      * @covers \airmoi\FileMaker\Command\CompoundFind::addSortRule
      * @todo   Implement testAddSortRule().
      */
