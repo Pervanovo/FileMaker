@@ -114,16 +114,18 @@ class Record
      */
     public function getField($field, $repetition = 0, $unencoded = false)
     {
+        /* FM 19.1.2 doesn't include table name prefix in getLayout */
+        $layoutField = $field;
         if (!is_null($this->parent) && !strpos($field, '::')) {
-            $field = $this->relatedSetName. '::' . $field;
+          $field = $this->relatedSetName. '::' . $field;
         }
 
         if (!isset($this->fields[$field])) {
             $this->fm->log('Field "' . $field . '" not found.', FileMaker::LOG_NOTICE);
-            return null;
+          return null;
         }
 
-        if (!isset($this->fields[$field][$repetition])) {
+      if (!isset($this->fields[$field][$repetition])) {
             $this->fm->log(
                 'Repetition "' . (int) $repetition . '" does not exist for "' . $field . '".',
                 FileMaker::LOG_NOTICE
@@ -131,7 +133,7 @@ class Record
             return null;
         }
 
-        $format = $this->getLayout()->getField($field)->result;
+        $format = $this->getLayout()->getField($layoutField)->result;
         $value = $this->fields[$field][$repetition];
 
         if (empty($value) && $this->fm->getProperty('emptyAsNull')) {
